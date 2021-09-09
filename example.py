@@ -1,6 +1,5 @@
 import numpy as np
 import pylab as pl
-import scipy as sp
 import iir_filter
 from scipy import signal
 #
@@ -20,20 +19,23 @@ pl.ylabel('ECG/mV')
 #
 f0 = 48.0
 f1 = 52.0
-sos = signal.butter(2, [f0/fs*2,f1/fs*2], 'bandstop', output='sos')
+sos1 = signal.butter(4, [f0/fs*2,f1/fs*2], 'bandstop', output='sos')
+f2 = 100
+sos2 = signal.butter(4, f2/fs*2, output='sos')
 
-f = iir_filter.IIR_filter(sos)
+iir1 = iir_filter.IIR_filter(sos1)
+iir2 = iir_filter.IIR_filter(sos2)
 y2 = np.zeros(len(y))
 for i in range(len(y)):
-    y2[i] = f.filter(y[i])
+    y2[i] = iir1.filter(iir2.filter(y[i]))
 
-yf = sp.fft(y2)
+yf = np.fft.fft(y2) / len(y2)
 yf[0] = 0
 
 pl.subplot(312);
-pl.plot(sp.linspace(0,fs,len(yf)),abs(yf))
+pl.plot(np.linspace(0,fs,len(yf)),20*np.log10(abs(yf)))
 pl.xlabel('time/sec')
-pl.ylabel('Spectrum')
+pl.ylabel('Spectrum/dB')
 pl.xlim(0,fs/2)
 #
 #
