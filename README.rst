@@ -13,7 +13,7 @@ Import
 
 Use the standard python command to import it::
 
-  import iir-filter
+  import iir_filter
 
 
 Calculate the coefficients
