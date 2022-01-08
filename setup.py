@@ -7,7 +7,7 @@ with open('README.rst') as f:
 
 setup(
     name='py-iir-filter',
-    version='1.0.5',
+    version='1.1.0',
     description="Fast realtime IIR filter",
     long_description=long_description,
     author='Bernd Porr',
