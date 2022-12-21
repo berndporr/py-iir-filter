@@ -7,6 +7,17 @@ processing of data. It's very efficient because it's not using any
 indexing operations internally. The class instance acts as the memory
 of the filter so that it remembers its past.
 
+Installation
+============
+
+Install form the python package index with::
+
+  pip install py-iir-filter
+
+You can also install it locally from the cloned github repo with::
+
+  python setup.py install
+
 
 Import
 ======
